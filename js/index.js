@@ -286,7 +286,7 @@ function drawFlames(flameHeight, color){
     img.style.width = '250px';
     img.style.height = '149px';
     img.style.transform = 'rotate(180deg)';
-    img.style.transition = '3s all';
+    img.style.transition = '1s all';
     img.style.position = 'fixed';
     img.style.left = 'calc(50% - 125px)';
     img.style.top = '-149px';
