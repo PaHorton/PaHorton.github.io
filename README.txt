@@ -1,1 +1,0 @@
-This is an under construction page for my personal website
