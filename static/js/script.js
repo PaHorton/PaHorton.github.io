@@ -149,7 +149,7 @@ if (firefox) {
 } else if (mobile) {
   var maxBoids = 150;
 } else {
-  var maxBoids = 500;
+  var maxBoids = 250;
 }
 var minBoids = 250;
 var numBoids = Math.sqrt(canvas.width * canvas.height) / 2;

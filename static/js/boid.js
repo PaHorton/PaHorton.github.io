@@ -78,7 +78,7 @@ class Boid {
     if (target.radius) {
       var buffer = target.radius + this.radius + 1;
     } else {
-      var buffer = this.radius * 2 + 1;
+      var buffer = this.radius * 10 + 1;
     }
 
     var dist = diff.magnitude();
@@ -92,8 +92,9 @@ class Boid {
       desired.y = 0;
     }
     desired.invert();
-    desired.subtract(this.velocity);
+    desired.add(this.velocity);
     desired.limitMagnitude(this.maxForce);
+
     return desired;
   }
 
@@ -223,7 +224,7 @@ class Boid {
     var separateWeight = 1;
     var cohesionWeight = 1;
     if ( walls ) var avoidWallsWeight = 1.2;
-    if ( avoidCenter ) var centerWeight = 1.5;
+    if ( avoidCenter ) var centerWeight = 1;
 
 
     // Apply forces
