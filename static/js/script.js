@@ -138,7 +138,7 @@ Victor.prototype.limitMagnitude = function (max) {
 /*---- Loop and Initializing ----*/
 
 // Checkbox Options
-var walls = true;
+var walls = false;
 var mouseSeek = false;
 var collisions = true;
 var avoidCenter = true;
