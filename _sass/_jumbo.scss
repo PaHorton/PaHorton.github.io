@@ -1,0 +1,67 @@
+@import url('https://fonts.googleapis.com/css?family=Lato:700|Open+Sans:600&display=swap');
+.jumbo {
+	color: white;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	// text-transform: lowercase;
+	font-family: 'Lato', sans-serif;
+	> * {
+		pointer-events: initial;
+	}
+	> h1 {
+		font-weight: 100;
+		font-size: 3em;
+		margin: 0;
+	}
+	> h2 {
+		font-weight: 100;
+		margin: 0;
+	}
+	> h3 {
+		font-weight: 100;
+		margin: 0;
+	}
+	> .buttons {
+		margin-top: 1rem;
+		display: flex;
+		@media (max-width: 768px) {
+			flex-direction: column;
+		}
+		flex-direction: row;
+		align-items: center;
+		justify-content: center;
+        font-family: 'Open Sans', sans-serif;
+		> a {
+			text-decoration: none;
+			color: #2980b9;
+			transition: color .2s;
+			&:hover {
+				color: #3498db;
+			}
+			&::after {
+				content: "\2219";
+				margin: 0 .5rem 0 .5rem;
+				pointer-events: none;
+				color: white;
+				cursor: initial;
+			}
+			@media (max-width: 768px) {
+				flex-direction: column;
+				&::after {
+					display: none !important;
+				}
+			}
+			&:last-of-type {
+				&::after {
+					display: none !important;
+				}
+			}
+		}
+	}
+}
+
+.nonreactive {
+	pointer-events: none !important;
+}
