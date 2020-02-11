@@ -64,6 +64,40 @@ class Boid {
   }
 
   /**
+   * Calculate the repel force for a boid and a target
+   *
+   * @param  object | target | The Victor.js vector for a target's position
+   * @return object | The repel force for the target as a vector
+   */
+  repel( target ){
+    var targetposition = target.clone();
+    var diff = targetposition.subtract(this.position);
+    var desired = new Victor(diff.x,diff.y);
+
+
+    if (target.radius) {
+      var buffer = target.radius + this.radius + 1;
+    } else {
+      var buffer = this.radius * 2 + 1;
+    }
+
+    var dist = diff.magnitude();
+    desired.normalize();
+    if (dist < buffer) {
+        desired.multiply({x:this.maxSpeed,y:this.maxSpeed})
+    } else if ( dist <= 100 ) {
+        desired.multiply({x:this.maxSpeed*(1-dist/100),y:this.maxSpeed*(1-dist/100)})
+    } else {
+      desired.x = 0;
+      desired.y = 0;
+    }
+    desired.subtract(this.velocity);
+    desired.limitMagnitude(this.maxForce);
+    desired.invert();
+    return desired;
+  }
+
+  /**
    * Calculate the separation force for a boid and its flock
    *
    * @param  array | boids | The boids array containing all the boids
@@ -181,7 +215,7 @@ class Boid {
     var separateForce = this.separate(boids);
     var cohesionForce = this.cohesion(boids);
     if ( walls ) var avoidWallsForce = this.avoidWalls();
-    if ( avoidCenter ) var centerForce = this.seek(center).invert();
+    if ( avoidCenter ) var centerForce = this.repel(center);
 
     // Weight Forces
     var alignWeight = 1.2;
@@ -189,7 +223,7 @@ class Boid {
     var separateWeight = 1;
     var cohesionWeight = 1;
     if ( walls ) var avoidWallsWeight = 1.2;
-    if ( avoidCenter ) var centerWeight = .05;
+    if ( avoidCenter ) var centerWeight = 1.5;
 
 
     // Apply forces
