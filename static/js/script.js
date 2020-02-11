@@ -141,7 +141,7 @@ Victor.prototype.limitMagnitude = function (max) {
 var walls = false;
 var mouseSeek = false;
 var collisions = true;
-var avoidCenter = true;
+var avoidCenter = false;
 
 // Set number of boids based on browser and screen size
 if (firefox) {
@@ -171,12 +171,13 @@ if ( size.width / 288 > 5 ) {
 
 var radiusCoefficients = [.5,.6,.7,.8,1];
 
+
 // Boid Attributes
 var colors = [
-  '#85dbcd',
-  '#5db3b8',
-  '#74b893',
-  '#8cc63f'
+    '#395573',
+    '#5e468c',
+    '#477ab3',
+    '#7e62b3',
 ];
 
 var diversity = 4;
