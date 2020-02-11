@@ -91,9 +91,9 @@ class Boid {
       desired.x = 0;
       desired.y = 0;
     }
+    desired.invert();
     desired.subtract(this.velocity);
     desired.limitMagnitude(this.maxForce);
-    desired.invert();
     return desired;
   }
 
