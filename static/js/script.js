@@ -139,9 +139,10 @@ Victor.prototype.limitMagnitude = function (max) {
 
 // Checkbox Options
 var walls = false;
-var mouseSeek = false;
+// var mouseSeek = true;
 var collisions = true;
 var avoidCenter = false;
+var snitchSeek = false;
 
 // Set number of boids based on browser and screen size
 if (firefox) {
@@ -179,6 +180,8 @@ var colors = [
     '#477ab3',
     '#7e62b3',
 ];
+
+var snitchColor = '#EFB86C'
 
 var diversity = 4;
 var diverseColors = colors.slice(0,diversity);
@@ -234,14 +237,15 @@ function createBoids() {
       y: y,
       speedIndex: speedIndex,
       radius: radius,
-      radiusCoefficient: radiusCoefficient,
+      radiusCoefficient: i == 0 ? radiusCoefficients.length - 1 : radiusCoefficient,
       quickness: quickness,
       quicknessCoefficient: quicknessCoefficient,
-      color: randomColor(diverseColors),
+      color: i == 0 ? snitchColor : randomColor(diverseColors),
       racism: racism,
       racismCoefficient: racismCoefficient,
       introversion: introversion,
-      introversionCoefficient: introversionCoefficient
+      introversionCoefficient: introversionCoefficient,
+      snitch: i == 0
     } ) );
   }
 
@@ -298,6 +302,7 @@ function startAnimating() {
 
 //Initalize program
 createBoids();
+var snitch = boids[0];
 startAnimating(60);
 
 /*---- end Loop and Initializing ----*/
@@ -311,6 +316,20 @@ startAnimating(60);
 addEventListener('mousemove', function(event){
   mouse.position.x = event.clientX;
   mouse.position.y = event.clientY;
+});
+
+
+/**
+ * Update mouse positions on mousemove
+ *
+ */
+addEventListener('click', function(event){
+  var target = mouse.position.clone()
+  var distance = target.subtract(snitch.position)
+  if(distance.length() < snitch.radius){
+    console.log("Caught!")
+    snitchSeek ^= true;
+  }
 });
 
 /**

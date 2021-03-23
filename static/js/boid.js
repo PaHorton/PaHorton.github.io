@@ -20,6 +20,7 @@ class Boid {
     this.racism = boid.racism * boid.racismCoefficient;
     this.color = boid.color;
     this.mass = (4/3) * Math.PI * Math.pow( this.radius,3 );
+    this.snitch = boid.snitch;
 
     // Speed & Velocity & Force
     this.maxSpeed = speedIndex * this.quickness;
@@ -142,7 +143,7 @@ class Boid {
    */
   align( boids ) {
     var neighborDist = 50;
-    var sum = new Victor();
+    var sum = new Victor();this.snitch
     var steer = new Victor();
     var count = 0;
     for (var i = 0; i < boids.length; i++) {
@@ -212,7 +213,8 @@ class Boid {
 
     // Get Forces
     var alignForce = this.align(boids);
-    if ( mouseSeek ) var mouseForce = this.seek(mouse.position);
+    if ( snitchSeek && this.snitch) var mouseForce = this.seek(mouse.position);
+    if ( snitchSeek ) var snitchForce = this.seek(snitch.position);
     var separateForce = this.separate(boids);
     var cohesionForce = this.cohesion(boids);
     if ( walls ) var avoidWallsForce = this.avoidWalls();
@@ -220,7 +222,8 @@ class Boid {
 
     // Weight Forces
     var alignWeight = 1.2;
-    if ( mouseSeek ) var mouseWeight = .2;
+    if ( snitchSeek && this.snitch ) var mouseWeight = 2;
+    if ( snitchSeek ) var snitchWeight = .2;
     var separateWeight = 1;
     var cohesionWeight = 1;
     if ( walls ) var avoidWallsWeight = 1.2;
@@ -229,7 +232,8 @@ class Boid {
 
     // Apply forces
     this.applyForce( alignForce, alignWeight );
-    if ( mouseSeek ) this.applyForce( mouseForce, mouseWeight );
+    if ( snitchSeek && this.snitch ) this.applyForce( mouseForce, mouseWeight );
+    if ( snitchSeek ) this.applyForce ( snitchForce, snitchWeight );
     this.applyForce( separateForce, separateWeight );
     this.applyForce( cohesionForce, cohesionWeight );
     if ( walls && avoidWallsForce ) this.applyForce( avoidWallsForce, avoidWallsWeight );
