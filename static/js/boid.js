@@ -19,6 +19,7 @@ class Boid {
     this.racismCoefficient = boid.racismCoefficient;
     this.racism = boid.racism * boid.racismCoefficient;
     this.color = boid.color;
+    this.attackColor = boid.attackColor;
     this.mass = (4/3) * Math.PI * Math.pow( this.radius,3 );
     this.snitch = boid.snitch;
 
@@ -359,7 +360,7 @@ class Boid {
   draw(){
     c.beginPath();
     c.arc(this.position.x, this.position.y, this.radius, 0, Math.PI * 2, false);
-    c.fillStyle = this.color;
+    c.fillStyle = snitchSeek ? this.attackColor : this.color;
     c.fill();
     c.closePath();
   }

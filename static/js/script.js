@@ -181,10 +181,18 @@ var colors = [
     '#7e62b3',
 ];
 
+var attackColors = [
+  '#9CF6F6',
+  '#86BBBD',
+  '#76949F',
+  '#6A6B83',
+];
+
 var snitchColor = '#EFB86C'
 
 var diversity = 4;
 var diverseColors = colors.slice(0,diversity);
+var diverseAttackColors = attackColors.slice(0,diversity);
 
 var quickness = 1;
 var introversion = .8;
@@ -241,6 +249,7 @@ function createBoids() {
       quickness: quickness,
       quicknessCoefficient: quicknessCoefficient,
       color: i == 0 ? snitchColor : randomColor(diverseColors),
+      attackColor: i == 0 ? snitchColor : randomColor(diverseAttackColors),
       racism: racism,
       racismCoefficient: racismCoefficient,
       introversion: introversion,
