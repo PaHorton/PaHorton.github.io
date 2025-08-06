@@ -1,78 +1,164 @@
-<!--
- .              +   .                .   . .     .  .
-                   .                    .       .     *
-  .       *                        . . . .  .   .  + .
-            "You Are Here"            .   .  +  . . .
-.                 |             .  .   .    .    . .
-                  |           .     .     . +.    +  .
-                 \|/            .       .   . .
-        . .       V          .    * . . .  .  +   .
-           +      .           .   .      +
-                            .       . +  .+. .
-  .                      .     . + .  . .     .      .
-           .      .    .     . .   . . .        ! /
-      *             .    . .  +    .  .       - O -
-          .     .    .  +   . .  *  .       . / |
-               . + .  .  .  .. +  .
-.      .  .  .  *   .  *  . +..  .            *
- .      .   . .   .   .   . .  +   .    .            +
- -->
- <!DOCTYPE html>
- <html>
-     <head>
-         <meta charset="UTF-8">
-         <title>Paul Horton</title>
-         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-         <link rel="stylesheet" href="static/index.css">
-         <!-- Primary Meta Tags -->
-        <meta name="title" content="Paul Horton">
-        <meta name="description" content="Exploration Systems Design PhD Candidate at ASU's School of Earth and Space Exploration
-        ">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Paul Horton</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root {
+      --bg: #065145;
+      --fg: #8dec79;
+    }
 
-        <!-- Open Graph / Facebook -->
-        <meta property="og:type" content="website">
-        <meta property="og:url" content="https://hortonpaul.com/">
-        <meta property="og:title" content="Paul Horton">
-        <meta property="og:description" content="Exploration Systems Design PhD Candidate at ASU's School of Earth and Space Exploration
-        ">
-        <meta property="og:image" content="https://hortonpaul.com/static/assets/meta.png">
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: var(--bg);
+      /* color: var(--fg); */
+    }
 
-        <!-- Twitter -->
-        <meta property="twitter:card" content="summary_large_image">
-        <meta property="twitter:url" content="https://hortonpaul.com/">
-        <meta property="twitter:title" content="Paul Horton">
-        <meta property="twitter:description" content="Exploration Systems Design PhD Candidate at ASU's School of Earth and Space Exploration
-        ">
-        <meta property="twitter:image" content="https://hortonpaul.com/static/assets/meta.png">
-     </head>
-     <body>
-         <canvas class="bg" id="boids"></canvas>
-         <div class="fg jumbo">
-                <h1>Paul Horton</h1>
-                <h2>Exploration Systems Design PhD&nbsp;Candidate</h2>
-                <h3>at ASU's School of Earth and&nbsp;Space&nbsp;Exploration</h3>
-                <div class="buttons">
-                    <a href="https://github.com/pahorton">github</a>
-                    <a href="https://twitter.com/Giansar26">twitter</a>
-                    <a href="https://www.linkedin.com/in/pahorton">linkedin</a>
-                    <a href="/Horton_CV.pdf">cv</a>
-                    <a href="mailto:pahorton@asu.edu">email</a>
-                </div>
-        </div>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
-        <script src="static/js/victor.min.js"></script>
-        <script src="static/js/boid.js"></script>
-        <script src="static/js/script.js"></script>
-        <!-- Google Analytics -->
-        <script>
-        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    .theme-bg {
+      background-color: var(--bg);
+    }
 
-        ga('create', 'UA-XXXXX-Y', 'auto');
-        ga('send', 'pageview');
-        </script>
-        <!-- End Google Analytics -->
-     </body>
- </html>
+    .theme-fg {
+      color: var(--fg);
+    }
+
+    .theme-box {
+      background-color: var(--fg);
+      color: var(--bg);
+    }
+
+    .theme-box-inverted {
+      background-color: var(--bg);
+      color: var(--fg);
+      border: 2px solid var(--fg);
+    }
+    
+    .borderless {
+      border: none;
+    }
+
+    .square {
+      aspect-ratio: 1 / 1;
+      width: 100%;
+    }
+
+    .pattern-dots {
+      width: 100%;
+      box-shadow: currentcolor 0px 0px 0px 1px inset;
+      background:
+        linear-gradient(45deg, currentcolor 1px, transparent 1px) 0% 0% / 10px 10px,
+        linear-gradient(-45deg, currentcolor 1px, transparent 1px);
+    }
+
+    .pattern-circles{
+      width: 100%; 
+      box-shadow: currentcolor 0px 0px 0px 1px inset; 
+      background: 
+        repeating-radial-gradient(circle at 100% center, currentcolor, currentcolor 1px, transparent 1px, transparent 2px);
+    }
+  </style>
+</head>
+<body class="theme-bg text-white p-4">
+  <div class="grid grid-cols-1 md:grid-cols-4 gap-2 max-w-screen-lg mx-auto items-stretch">
+    <!-- Header Title (full width on mobile, 3/4 on desktop) -->
+    <div class="md:col-span-3 theme-box-inverted p-6 shadow flex flex-col justify-center text-center pattern-dots">
+      <h1 class="text-5xl font-bold">Paul Horton, Ph.D.</h1>
+      <p class="text-xl mt-2">Scientific Software Systems Engineer</p>
+    </div>
+
+    <!-- Icon Grid (full width on mobile, 1/4 on desktop, responsive 4x1 on mobile, 2x2 on desktop) -->
+    <div class="md:col-span-1 grid grid-cols-4 md:grid-cols-2 grid-rows-1 md:grid-rows-2 gap-2">
+      <a href="#" class="square theme-box flex items-center justify-center">
+        <i data-lucide="github" class="w-16 h-16"></i>
+      </a>
+      <a href="#" class="square theme-box flex items-center justify-center">
+        <i data-lucide="linkedin" class="w-16 h-16"></i>
+      </a>
+      <a href="#" class="square theme-box flex items-center justify-center">
+        <i data-lucide="mail" class="w-16 h-16"></i>
+      </a>
+      <a href="#" class="square theme-box flex items-center justify-center">
+        <i data-lucide="file-user" class="w-16 h-16"></i>
+      </a>
+    </div>
+  </div>
+
+  <!-- Dithered Photo and Bio Row -->
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-2 max-w-screen-lg mx-auto mt-2">
+    <div class="theme-box aspect-square overflow-hidden">
+      <canvas id="ditheredCanvas" class="w-full h-full"></canvas>
+    </div>
+    <div class="md:col-span-2 theme-box p-6 flex items-center">
+      <p class="text-lg leading-relaxed">
+        BIO: 
+        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+      </p>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-2 max-w-screen-lg mx-auto mt-2">
+    <!-- EXPERIENCES -->
+    <div class="flex flex-col gap-2">
+      <div class="theme-box p-6">
+        <h2 class="text-2xl font-bold mb-4">Experience</h2>
+        <ul class="space-y-4">
+          <li>
+            <h3 class="text-lg font-semibold">NASA / ASTHROS</h3>
+            <p class="text-sm italic text-[var(--fg)]/80">Systems Engineer · 2023–Present</p>
+            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. </p>
+          </li>
+          <li>
+            <h3 class="text-lg font-semibold">Major League Hacking</h3>
+            <p class="text-sm italic text-[var(--fg)]/80">Hackathon Coach · 2022–2024</p>
+            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. </p>
+          </li>
+          <li>
+            <h3 class="text-lg font-semibold">sunhacks</h3>
+            <p class="text-sm italic text-[var(--fg)]/80">Director of Technology · 2021–2024</p>
+            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. </p>
+          </li>
+          <li>
+            <h3 class="text-lg font-semibold">sunhacks</h3>
+            <p class="text-sm italic text-[var(--fg)]/80">Director of Technology · 2021–2024</p>
+            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. </p>
+          </li>
+          <li>
+            <h3 class="text-lg font-semibold">sunhacks</h3>
+            <p class="text-sm italic text-[var(--fg)]/80">Director of Technology · 2021–2024</p>
+            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. </p>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- EDUCATION -->
+  <div class="flex flex-col gap-2 h-full">
+    <div class="theme-box p-6">
+      <h2 class="text-2xl font-bold mb-4">Education</h2>
+      <ul class="space-y-4">
+        <li>
+          <h3 class="text-lg font-semibold">Arizona State University</h3>
+          <p class="text-sm italic text-[var(--fg)]/80">B.S. Software Engineering · 2014-2018</p>
+            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. </p>
+        </li>
+      </ul>
+    </div>
+      <!-- SPACER box that fills remaining height -->
+      <div class="flex-grow theme-box-inverted pattern-dots">
+        <canvas id="boids" class="w-full h-full"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- Current positions -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+  <script>
+    lucide.createIcons();
+  </script>
+  <script type="module" src="src/random.js"></script>
+  <script src="src/dots.js"></script>
+</body>
+</html>
